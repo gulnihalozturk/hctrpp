@@ -18,10 +18,12 @@ The paper leaves the concrete 2n-bit hash open ("for instance POLYVAL over
 GF(2^256)"). This implementation defines the normative instantiation,
 mirroring the HCTR2 reference conventions (ePrint 2021/1441):
 
-* **POLYVAL256** — the RFC 8452 POLYVAL construction lifted to GF(2^256)
-  with the reciprocal of the Rijndael-256/GHASH-256 field polynomial,
-  `P(x) = x^256 + x^254 + x^251 + x^246 + 1`. Field elements are 256-bit strings
-  in little-endian order (bit *i* of the string is the coefficient of `x^i`).
+* **POLYVAL256** — the RFC 8452 POLYVAL construction lifted to GF(2²⁵⁶),
+  using `P(x) = x^256 + x^254 + x^251 + x^246 + 1`, the reciprocal of
+  `x^256 + x^10 + x^5 + x^2 + 1` — the lexicographically-first minimum-weight
+  irreducible polynomial of degree 256, i.e., the natural GHASH-style choice
+  for a 256-bit field. Field elements are 256-bit strings in little-endian order
+  (bit *i* of the string is the coefficient of `x^i`).
   `POLYVAL256(h, M_1..M_l): S_j = (S_{j-1} xor M_j) * h * x^-256`, `S_0 = 0`.
 * **Hash input encoding** `H_h(T, M)` — HCTR2's encoding with 32-byte blocks:
   `bin256(2|T| + 2 [+1 if |M| mod 256 != 0]) || pad(T) || (M | pad(M || 0x01))`
