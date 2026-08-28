@@ -1,0 +1,8 @@
+-O2
+-march=x86-64-v4
+-maes
+-mpclmul
+-mvaes
+-mvpclmulqdq
+-Iinclude
+-I../HCTR_PLUS/include
