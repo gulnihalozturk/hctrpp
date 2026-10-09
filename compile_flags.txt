@@ -6,3 +6,7 @@
 -mvpclmulqdq
 -Iinclude
 -I../HCTR_PLUS/include
+-Ibench
+-I../CHCTR-HCTR2TwKD/benchmark/src
+-I../CHCTR-HCTR2TwKD/benchmark/tests
+-I../CHCTR-HCTR2TwKD/third_party/linux-kernel
